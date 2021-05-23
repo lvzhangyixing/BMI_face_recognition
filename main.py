@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 
 import bmi_predictor
 import cv2
-
+from  test_camera import take_photo
 
 class Example(QMainWindow):
 
@@ -89,13 +89,13 @@ class Example(QMainWindow):
         self.prediction_label.setText(text)
         self.prediction_label.adjustSize()
 
-    def snapShotCt(self):  # camera_idx的作用是选择摄像头。如果为0则使用内置摄像头，比如笔记本的摄像头，用1或其他的就是切换摄像头。
-        """拍照函数"""
-        camera_idx = 0
-        cap = cv2.VideoCapture(camera_idx)
-        ret, frame = cap.read()  # cao.read()返回两个值，第一个存储一个bool值，表示拍摄成功与否。第二个是当前截取的图片帧。
-        cv2.imwrite("/Users/apple/PycharmProjects/face_BMI/data/height_weight_test/capture.jpg", frame)  # 写入图片
-        cap.release()  # 释放
+    # def snapShotCt(self):  # camera_idx的作用是选择摄像头。如果为0则使用内置摄像头，比如笔记本的摄像头，用1或其他的就是切换摄像头。
+    #     """拍照函数"""
+    #     camera_idx = 0
+    #     cap = cv2.VideoCapture(camera_idx)
+    #     ret, frame = cap.read()  # cao.read()返回两个值，第一个存储一个bool值，表示拍摄成功与否。第二个是当前截取的图片帧。
+    #     cv2.imwrite("/Users/apple/PycharmProjects/face_BMI/data/height_weight_test/capture.jpg", frame)  # 写入图片
+    #     cap.release()  # 释放
 
 
 
@@ -116,7 +116,7 @@ class Example(QMainWindow):
         pushButton_snapshot = QPushButton("拍照", self)
         pushButton_snapshot.move(30, 100)
         pushButton_snapshot.setObjectName("pushButton_snapshot")
-        pushButton_snapshot.clicked.connect(self.snapShotCt)
+        pushButton_snapshot.clicked.connect(take_photo)
 
         # 显示预测结果标签
         self.prediction_label = QLabel(self)
